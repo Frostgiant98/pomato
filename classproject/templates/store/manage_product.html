@@ -1,0 +1,85 @@
+{% extends 'page_setup.html' %}
+{% block page_title %} Profile {% endblock page_title %}
+
+{% block body_content %}
+{% load static %}
+<h1 class="col-2">
+    Manage Products
+</h1>
+
+<div class="col-10 mx-auto mt-4">
+    
+    <table class="table table-hover mx-auto">
+        <thead>
+                
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Picture</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Post User</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Modify</th>
+                <th>Delete</th>
+                
+                
+            </tr>
+        </thead>
+
+        {% if product %}
+
+        {% for prod in product %}
+
+        <tbody>
+            <tr>
+                <a href=""><td>{{prod.product_id}}</td></a>
+                <td>{{prod.product_name}}</td>
+                {% if prod.profile_picture %}
+                <td><img style="max-height: 40px;" src="{{prod.profile_picture.url}}" alt=""></td>
+                {% else %}
+
+                <td><img src="" alt="Product"></td>
+                
+                {% endif %}
+
+                <td>£{{prod.price}}</td>
+                <td>{{prod.quantity}}</td>
+                <td><a href="{% url 'userprofile' prod.user_id %}">{{prod.user.username}}</a></td>
+                <td>{{prod.description}}</td>
+                <td><a href="{% url 'approveprod' prod.product_id %}">{{prod.status}}</a></td>
+                <td><a href="{% url 'editprod' prod.product_id %}">Edit</a></td>
+                <td><a href="{% url 'deleteprod' prod.product_id %}">Delete</a></td>   
+
+            </tr>
+        </tbody>
+
+        
+
+        {% endfor %}
+
+        {% endif %}
+        
+        <tfoot>
+                
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Picture</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Post User</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Modify</th>
+                <th>Delete</th>
+            
+            
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+{% endblock body_content %}

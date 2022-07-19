@@ -1,0 +1,136 @@
+{% extends 'page_setup.html' %}
+{% block page_title %} Manage Staff {% endblock page_title %}
+
+{% block body_content %}
+{% load static %}
+<h1 class="col-2">
+    Manage Staff
+</h1>
+
+<div class="col-10 mx-auto mt-4">
+    
+    <table class="table table-hover mx-auto">
+        <thead>
+                
+            <tr>
+                <th>User ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>last login date</th>
+                <th>Super Admin</th>
+                <th>Photo</th>
+                <th></th>
+                <th></th>
+                
+                
+                
+            </tr>
+        </thead>
+
+        {% if user %}
+
+        {% for i in user %}
+
+        {% if i.is_staff %}
+
+        
+
+        <tbody>
+            <tr>
+                <a href=""><td>{{i.id}}</td></a>
+                <td>{{i.first_name}}</td>
+                <td>{{i.last_name}}</td>
+                <td>{{i.last_login}}</td>
+                <td>{{i.is_superuser}}</td>
+                {% if i.profile_picture %}
+                <td><img style="max-height: 40px;" src="{{i.profile_picture.url}}" alt=""></td>
+                {% else %}
+
+                <td><img src="" alt="No image"></td>
+                
+                {% endif %}
+   
+                <td><a href="{% url 'staff_update' i.id %}">Modify</a></td>
+                <td><a href="{% url 'userprofile' i.id %}">view</a></td>
+                
+
+            </tr>
+        </tbody>
+
+        {% else %}
+
+        {% endif %}
+
+        {% endfor %}
+
+        {% endif %}
+        
+       
+    </table>
+</div>
+
+<h1 class="col-2">
+    Manage Customer
+</h1>
+
+<div class="col-10 mx-auto mt-4">
+    
+    <table class="table table-hover mx-auto">
+        <thead>
+                
+            <tr>
+                <th>User ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>last login date</th>
+                <th>Photo</th>
+                <th></th>
+                <th></th>
+                
+                
+            </tr>
+        </thead>
+
+        {% if user %}
+
+        {% for i in user %}
+
+        {% if i.is_staff %}
+
+        
+
+        
+        {% else %}
+        <tbody>
+            <tr>
+                <a href=""><td>{{i.id}}</td></a>
+                <td>{{i.first_name}}</td>
+                <td>{{i.last_name}}</td>
+                <td>{{i.last_login}}</td>
+                {% if i.profile_picture %}
+                <td><img style="max-height: 40px;" src="{{i.profile_picture.url}}" alt=""></td>
+                {% else %}
+
+                <td><img src="" alt="No image"></td>
+                
+                {% endif %}
+   
+                <td><a href="{% url 'staff_update' i.id %}">Modify</a></td>
+                <td><a href="{% url 'userprofile' i.id %}">view</a></td>
+                
+
+            </tr>
+        </tbody>
+
+        {% endif %}
+
+        {% endfor %}
+
+        {% endif %}
+        
+       
+    </table>
+</div>
+
+
+{% endblock body_content %}

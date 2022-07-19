@@ -1,0 +1,35 @@
+{% extends 'page_setup.html' %}
+{% block page_title %} Update Form {% endblock page_title %}
+
+{% block body_content %}
+{% load static %}
+
+<div style="height:50px">
+
+</div>
+<div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-md-6 col-12 col-offset-3">
+            <form method="post" enctype="multipart/form-data" action="">
+                {% csrf_token %}
+                    {% load bootstrap %}
+                    {{ user_form|bootstrap }}
+                    {{ customer_form|bootstrap }}
+                    <div class="d-flex justify-content-center ">
+                        <input class="bc-white ml-2 loginbutton" type="submit" value="Upload">
+                    </div>
+                    <div class="d-flex justify-content-center ">
+                        
+                    </div>
+                    <div class="d-flex justify-content-center ">
+                    </div>
+                    
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock body_content %}
+

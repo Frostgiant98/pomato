@@ -1,0 +1,72 @@
+{% extends 'page_setup.html' %}
+{% block page_title %} User Cart {% endblock page_title %}
+
+{% block body_content %}
+{% load static %}
+<h1 class="col-2">
+    Product Cart
+</h1>
+
+<div class="col-10 mx-auto mt-4">
+    
+    <table class="table table-hover mx-auto">
+        <thead>
+                
+            <tr>
+                <th>Product Name</th>
+                <th>Picture</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Modify</th>
+                <th>Delete</th>
+                
+                
+            </tr>
+        </thead>
+
+        {% if cart %}
+
+        {% for item in cart %}
+
+        <tbody>
+            <tr>
+                <td>{{item.product.product_name}}</td>
+                
+                {% if item.product.profile_picture %}
+                <td><img style="max-height: 40px;" src="{{item.product.profile_picture.url}}" alt=""></td>
+                {% else %}
+
+                <td><img src="" alt="Product"></td>
+                
+                {% endif %}
+                
+                <td>£{{item.product.price}}</td>
+                <td>{{item.quantity}}</td>
+                <a href=""><td>£{{item.price}}</td></a>
+                <td><a href="{% url 'editord' item.order_id %}">Edit</a></td>
+                <td><a href="{% url 'deleteord' item.order_id %}">Delete</a></td>   
+
+            </tr>
+        </tbody>
+
+        
+
+        {% endfor %}
+
+        
+        {% endif %}
+        
+
+    </table>
+
+    <div>
+        <div class="input-group mb-3">
+            <input text="" type="submit" style="max-width: 200px; margin: auto" class="form-control">
+            <span class="btn btn-danger " style="min-width:200px;">Pay</span>
+          </div>
+    </div>
+</div>
+
+
+{% endblock body_content %}

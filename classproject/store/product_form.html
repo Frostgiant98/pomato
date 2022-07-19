@@ -1,0 +1,9 @@
+<form method="post" enctype="multipart/form-data">
+    <div class="col-6">
+        {% csrf_token %}
+        {{form.as_table}}
+    </div>
+    <div class="col-2 mt-2">
+    <input class="bc-white loginbutton " type="submit" value="Post">
+    </div>
+</form>

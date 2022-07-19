@@ -1,0 +1,63 @@
+{% extends 'page_setup.html' %}
+{% block page_title %} Profile {% endblock page_title %}
+
+{% block body_content %}
+{% load static %}
+<h1 class="col-2">
+    Profile Information
+</h1>
+
+<div class="p-4 m-4 row justify-content-center ">
+    
+    <div class="col ">
+        <H3>Authentications</H3>
+        {% if user.is_superuser %}
+        <a>SuperAdmin </a><i class="fa fa-toggle-on"></i></a>
+        {% else %}
+        <a>SuperAdmin </a><i class="fa fa-toggle-off"></i></a>
+        {% endif %}
+        <br><hr>
+        {% if user.is_staff %}
+        <a>Admin </a><i class="fa fa-toggle-on"></i></a>
+        {% else %}
+        <a>Admin </a><i class="fa fa-toggle-off"></i></a>
+        {% endif %}
+        <br><hr>
+        {% if user.is_active %}
+        <a>Active Account </a><i class="fa fa-toggle-on"></i></a>
+        {% else %}
+        <a>Active Account </a><i class="fa fa-toggle-off"></i></a>
+        {% endif %}
+        <br><hr>
+
+
+    </div>
+
+
+    <div class=" col-6 m-2 alert alert-secondary">
+        <h3>Account Details</h3>
+        User Name : {{person.get.username}} <br>
+        First Name : {{person.get.first_name}} <br>
+        Last Name : {{person.get.last_name}} <br>
+        Email : <a href="mailto:{{person.get.email}}">{{person.get.email}}</a> <br>
+        Previous Session : {{person.get.last_login}} <br>
+        
+
+    </div>
+
+</div>
+
+<di class="my-auto">
+
+    <span class=" col-2 p-4">
+        
+        <a href="{% url 'staff_update' person.get.id %}" class="m-2"><button style="width: 180px;" class=" m-1 btn btn-lg btn-secondary">Edit User</button></a>                
+        <a href="{% url 'logout' %}" class="m-2"><button style="width: 180px;" class=" m-1 btn btn-lg btn-danger">Delete User</button></a>
+    </span>
+
+</div>
+
+
+
+
+{% endblock body_content %}

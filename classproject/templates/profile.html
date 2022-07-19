@@ -1,0 +1,68 @@
+{% extends 'page_setup.html' %}
+{% block page_title %} Profile {% endblock page_title %}
+
+{% block body_content %}
+{% load static %}
+<h1 class="col-2">
+    Profile Information
+</h1>
+
+<div class="p-4 m-4 row justify-content-center ">
+    
+    <div class="col ">
+        <H3>Authentications</H3>
+        {% if user.is_superuser %}
+        <a>SuperAdmin </a><i class="fa fa-toggle-on"></i></a>
+        {% else %}
+        <a>SuperAdmin </a><i class="fa fa-toggle-off"></i></a>
+        {% endif %}
+        <br><hr>
+        {% if user.is_staff %}
+        <a>Admin </a><i class="fa fa-toggle-on"></i></a>
+        {% else %}
+        <a>Admin </a><i class="fa fa-toggle-off"></i></a>
+        {% endif %}
+        <br><hr>
+        {% if user.is_active %}
+        <a>Active Account </a><i class="fa fa-toggle-on"></i></a>
+        {% else %}
+        <a>Active Account </a><i class="fa fa-toggle-off"></i></a>
+        {% endif %}
+        <br><hr>
+
+
+    </div>
+
+    <div class=" col-6 m-2 alert alert-danger  ">
+        <h3>Account Details</h3>
+        User Name : {{user.username}} <br>
+        First Name : {{user.first_name}} <br>
+        Last Name : {{user.last_name}} <br>
+        Email : {{user.email}} <br>
+        Previous Session : {{user.last_login}} <br>
+        
+
+    </div>
+    {% if user.is_staff %}
+    <span class="fa col p-4">
+        <a href="{% url 'Upload_product' %}"  class="m-2"><button style="width: 180px;" class=" fa-upload m-1 btn btn-lg btn-success"> Upload Product</button></a><br>
+        <a href="{% url 'password_change' %}" class="m-2"><button style="width: 180px;" class=" m-1 btn btn-lg btn-secondary">Change Password</button></a>
+        <a href="{% url 'manageprod' %}" class="m-2"><button style="width: 180px;" class=" m-1 btn btn-lg btn-secondary">Manage Products</button></a>        
+        <a href="{% url 'staff_display' %}"  class="m-2"><button style="width: 180px;" class=" m-1 btn btn-lg btn-primary">Manage Staffs</button></a>
+        <a href="{% url 'logout' %}"  class="m-2"><button style="width: 180px;" class=" m-1 btn btn-lg btn-danger">Log Out</button></a>
+
+    </span>
+    {% else %}
+    <span class=" col-2 p-4">
+        
+        <a href="{% url 'password_change' %}" class="m-2"><button style="width: 180px;" class=" m-1 btn btn-lg btn-secondary">Change password</button></a>                
+        <a href="{% url 'customer_update' request.user.id %}" class="m-2"><button style="width: 180px;" class=" m-1 btn btn-lg btn-danger">Edit profile</button></a>
+        <a href="{% url 'logout' %}" class="m-2"><button style="width: 180px;" class=" m-1 btn btn-lg btn-danger">Log out</button></a>
+    </span>
+    {% endif %}
+</div>
+
+
+
+
+{% endblock body_content %}
